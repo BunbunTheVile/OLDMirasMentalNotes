@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MirasMentalNotes", "MirasMentalNotes\MirasMentalNotes.csproj", "{053C1A53-2B88-48F9-A604-06927E17292D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{053C1A53-2B88-48F9-A604-06927E17292D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053C1A53-2B88-48F9-A604-06927E17292D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053C1A53-2B88-48F9-A604-06927E17292D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053C1A53-2B88-48F9-A604-06927E17292D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5469E75E-0AE3-4D91-AF48-17BB3EFF43E2}
+	EndGlobalSection
+EndGlobal
