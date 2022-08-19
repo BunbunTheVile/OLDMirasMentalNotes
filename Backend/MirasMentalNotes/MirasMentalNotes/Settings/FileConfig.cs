@@ -5,7 +5,12 @@ namespace MirasMentalNotes.Settings
 {
     public class FileConfig
     {
-        public string? ContentDirectory { get; set; }
+        public string ContentDirectory { get; set; }
+
+        public FileConfig(string contentDirectory = "DefaultContent")
+        {
+            ContentDirectory = contentDirectory;
+        }
 
         public static FileConfig LoadFromFile() 
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MirasMentalNotes.Models;
 using MirasMentalNotes.Settings;
 
 namespace MirasMentalNotes.Controllers
@@ -7,6 +8,14 @@ namespace MirasMentalNotes.Controllers
     [Route("api/content")]
     public class ContentController : ControllerBase
     {
+        [HttpGet]
+        [Route("{fileName}")]
+        public ContentViewModel? GetContentFile(string fileName)
+        {
+            var content = ContentViewModel.FromFileName(fileName);
+            return content;
+        }
+
         [HttpGet]
         public List<string> GetAllContentFileNames()
         {
