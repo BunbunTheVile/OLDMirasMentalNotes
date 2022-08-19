@@ -11,6 +11,6 @@ app.UseStaticFiles();
 app.UseAuthorization();
 app.MapControllers();
 
-Settings.Initialize();
+AppSettings.Initialize();
 
 app.Run();

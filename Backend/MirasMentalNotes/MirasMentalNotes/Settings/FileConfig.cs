@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using MirasMentalNotes.Resources;
+using System.Text.Json;
 
 namespace MirasMentalNotes.Settings
 {
@@ -6,12 +7,17 @@ namespace MirasMentalNotes.Settings
     {
         public string? ContentDirectory { get; set; }
 
-        public static FileConfig? LoadFromFile() 
+        public static FileConfig LoadFromFile() 
         {
-            if (!File.Exists(Settings.FileConfigPath)) return null;
+            if (!File.Exists(AppSettings.FileConfigPath)) 
+                throw new FileNotFoundException(Messages.FileConfigNotFound);
 
-            var configString = File.ReadAllText(Settings.FileConfigPath);
-            return JsonSerializer.Deserialize<FileConfig>(configString);
+            var configString = File.ReadAllText(AppSettings.FileConfigPath);
+            var config = JsonSerializer.Deserialize<FileConfig>(configString);
+
+            if (config == null) throw new JsonException(Messages.FileConfigBadFormat);
+
+            return config;
         }
 
         public void SaveToFile()
@@ -19,7 +25,7 @@ namespace MirasMentalNotes.Settings
             var options = new JsonSerializerOptions { WriteIndented = true };
             var configString = JsonSerializer.Serialize(this, options);
 
-            File.WriteAllText(Settings.FileConfigPath, configString);
+            File.WriteAllText(AppSettings.FileConfigPath, configString);
         }
     }
 }
