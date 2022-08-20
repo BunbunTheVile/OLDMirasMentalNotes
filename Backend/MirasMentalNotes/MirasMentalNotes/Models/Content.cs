@@ -2,21 +2,21 @@
 
 namespace MirasMentalNotes.Models
 {
-    public record ContentViewModel
+    public record Content
     {
         public string? FileName { get; set; }
-        public string? Content { get; set; }
+        public string? FileContent { get; set; }
     
-        public static ContentViewModel? FromFileName(string fileName)
+        public static Content? FromFileName(string fileName)
         {
             var contentDir = AppSettings.FileConfig.ContentDirectory;
             var filePath = Path.Combine(contentDir, fileName);
 
             if (!File.Exists(filePath)) return null;
 
-            var contentFile = new ContentViewModel();
+            var contentFile = new Content();
             contentFile.FileName = fileName;
-            contentFile.Content = File.ReadAllText(filePath);
+            contentFile.FileContent = File.ReadAllText(filePath);
 
             return contentFile;
         }

@@ -10,14 +10,17 @@ namespace MirasMentalNotes.Controllers
     {
         [HttpGet]
         [Route("{fileName}")]
-        public ContentViewModel? GetContentFile(string fileName)
+        public ActionResult<Content> GetContentFile(string fileName)
         {
-            var content = ContentViewModel.FromFileName(fileName);
-            return content;
+            var content = Models.Content.FromFileName(fileName);
+
+            return content is not null
+                ? content
+                : NotFound("The requested file does not exist.");
         }
 
         [HttpGet]
-        public List<string> GetAllContentFileNames()
+        public ActionResult<List<string>> GetAllContentFileNames()
         {
             var fileNames = Directory.GetFiles(AppSettings.FileConfig.ContentDirectory!).ToList();
             return GetNamesTrimmedToRelativePaths(fileNames);
