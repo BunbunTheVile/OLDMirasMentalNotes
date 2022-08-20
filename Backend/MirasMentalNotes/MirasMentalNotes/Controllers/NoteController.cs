@@ -5,19 +5,22 @@ using MirasMentalNotes.Settings;
 namespace MirasMentalNotes.Controllers
 {
     [ApiController]
-    [Route("api/content")]
-    public class ContentController : ControllerBase
+    [Route("api/note")]
+    public class NoteController : ControllerBase
     {
         [HttpGet]
         [Route("{fileName}")]
-        public ContentViewModel? GetContentFile(string fileName)
+        public ActionResult<Note> GetNote(string fileName)
         {
-            var content = ContentViewModel.FromFileName(fileName);
-            return content;
+            var note = Note.FromFileName(fileName);
+
+            return note is not null
+                ? note
+                : NotFound("The requested file does not exist.");
         }
 
         [HttpGet]
-        public List<string> GetAllContentFileNames()
+        public ActionResult<List<string>> GetAllNoteNames()
         {
             var fileNames = Directory.GetFiles(AppSettings.FileConfig.ContentDirectory!).ToList();
             return GetNamesTrimmedToRelativePaths(fileNames);
