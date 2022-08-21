@@ -1,0 +1,25 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+}
+
+app-note-list {
+    width: 30%;
+    margin-right: 5px;
+}
+
+app-note-display {
+    width: 70%;
+}
+
+app-note-list, app-note-display {
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+h1 {
+    border-bottom: 1px solid var(--text-color);
+    text-align: center;
+}

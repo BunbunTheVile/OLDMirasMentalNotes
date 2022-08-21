@@ -1,3 +1,7 @@
 <h2>Your Notes</h2>
 
-<div *ngFor="let file of files">{{ file }}</div>
+<ul>
+    <li class="list-item" *ngFor="let file of files" (click)="select(file)">
+        {{ file }}
+    </li>
+</ul>
