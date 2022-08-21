@@ -1,11 +1,12 @@
 :root {
-    --background-color: #111;
-    --text-color: #cef;
+    --background1: #111;
+    --background2: #222;
+    --text-color: #acf;
     --text-color-highlight: #6af;
 }
 
 * {
     font-family: Verdana, Arial, sans-serif;
-    background-color: var(--background-color);
+    background-color: var(--background1);
     color: var(--text-color);
 }

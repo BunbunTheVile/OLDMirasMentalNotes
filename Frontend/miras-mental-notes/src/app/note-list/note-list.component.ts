@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NoteService } from '../services/note.service';
 
@@ -9,6 +10,7 @@ import { NoteService } from '../services/note.service';
 })
 export class NoteListComponent implements OnInit {
   files: string[] = [];
+  fileInput = new FormControl<string>("");
 
   constructor(private noteService: NoteService, private router: Router) { }
 
@@ -18,5 +20,17 @@ export class NoteListComponent implements OnInit {
 
   public select(file: string): void {
     this.noteService.select(file);
+  }
+
+  public create(): void {
+    const fileName = this.fileInput.getRawValue();
+
+    if (!fileName) return;
+
+    this.noteService.create(fileName).subscribe(note => {
+      if (note.file)
+        this.files.push(note.file);
+        this.fileInput.setValue("");
+    });
   }
 }

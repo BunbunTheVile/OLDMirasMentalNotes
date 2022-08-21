@@ -1,12 +1,38 @@
-.list-item {
-    color: var(--text-color-highlight)
+li {
+    color: var(--text-color-highlight);
+    margin-left: 8px;
 }
 
-.list-item:hover {
+li:hover {
     cursor: pointer;
 }
 
 h2 {
     border-bottom: 1px solid var(--text-color);
     text-align: center;
+}
+
+#add-button {
+    margin-left: 4px;
+    margin-right: 4px;
+    width: fit-content;
+}
+
+input {
+    width: 100%;
+}
+
+#input-container {
+    width: 100%;
+    padding-right: 8px;
+}
+
+#add-button:hover {
+    cursor: pointer;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 8px;
 }

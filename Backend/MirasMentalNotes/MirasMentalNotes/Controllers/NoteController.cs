@@ -8,6 +8,19 @@ namespace MirasMentalNotes.Controllers
     [Route("api/note")]
     public class NoteController : ControllerBase
     {
+        [HttpPost]
+        [Route("{fileName}")]
+        public ActionResult<Note> CreateNote(string fileName)
+        {
+            var filePath = Path.Combine(AppSettings.FileConfig.ContentDirectory, fileName);
+
+            if (System.IO.File.Exists(filePath))
+                return BadRequest("A file with that name already exists.");
+
+            System.IO.File.WriteAllText(filePath, "");
+            return CreatedAtAction(nameof(GetNote), new { fileName }, new Note { File = fileName });
+        }
+
         [HttpGet]
         [Route("{fileName}")]
         public ActionResult<Note> GetNote(string fileName)
