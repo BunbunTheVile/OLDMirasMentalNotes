@@ -1,0 +1,12 @@
+.list-item {
+    color: var(--text-color-highlight)
+}
+
+.list-item:hover {
+    cursor: pointer;
+}
+
+h2 {
+    border-bottom: 1px solid var(--text-color);
+    text-align: center;
+}
