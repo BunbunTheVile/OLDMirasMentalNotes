@@ -4,12 +4,12 @@
 }
 
 app-note-list {
-    width: 30%;
+    width: 20%;
     margin-right: 5px;
 }
 
 app-note-display {
-    width: 70%;
+    width: 80%;
 }
 
 app-note-list, app-note-display {
