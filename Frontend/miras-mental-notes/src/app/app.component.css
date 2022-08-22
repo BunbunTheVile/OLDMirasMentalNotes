@@ -17,6 +17,7 @@ app-note-list, app-note-display {
     border-radius: 5px;
     padding-left: 8px;
     padding-right: 8px;
+    overflow: hidden;
 }
 
 h1 {

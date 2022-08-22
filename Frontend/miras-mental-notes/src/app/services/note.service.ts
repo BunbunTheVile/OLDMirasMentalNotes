@@ -25,10 +25,14 @@ export class NoteService {
     return this.httpClient.get<Note>(`${this.backendUrl}/${fileName}`)
   }
 
-  public select(fileName: string) {
+  public select(fileName: string): void {
     this.get(fileName).subscribe(note => {
       this.currentNote = note;
       this.currentNoteChanged.emit(note);
     });
+  }
+
+  public create(fileName: string): Observable<Note> {
+    return this.httpClient.post<Note>(`${this.backendUrl}/${fileName}`, null);
   }
 }

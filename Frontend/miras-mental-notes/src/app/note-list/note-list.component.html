@@ -1,7 +1,14 @@
 <h2>Your Notes</h2>
 
-<ul>
-    <li class="list-item" *ngFor="let file of files" (click)="select(file)">
+
+    <li *ngFor="let file of files" (click)="select(file)">
         {{ file }}
     </li>
-</ul>
+
+
+<form class="flex-container">
+    <i id="add-button" class="material-icons" (click)="create()">add</i>
+    <span id="input-container">
+        <input (keydown.enter)="create()" id="fileToCreate" type="text" [formControl]="fileInput" autofocus>
+    </span>
+</form>
