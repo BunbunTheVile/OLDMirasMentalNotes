@@ -1,12 +1,17 @@
 :root {
     --background1: #111;
     --background2: #222;
-    --text-color: #acf;
+    --text-color: #ddd;
     --text-color-highlight: #6af;
+    --text-color-disabled: #aaa;
 }
 
 * {
     font-family: Verdana, Arial, sans-serif;
     background-color: var(--background1);
     color: var(--text-color);
+}
+
+.material-icons {
+    color: var(--text-color-highlight)
 }

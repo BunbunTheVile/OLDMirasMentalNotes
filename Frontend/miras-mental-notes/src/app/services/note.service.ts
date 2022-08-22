@@ -39,4 +39,8 @@ export class NoteService {
   public delete(fileName: string): Observable<any> {
     return this.httpClient.delete(`${this.backendUrl}/${fileName}`);
   }
+
+  public save(note: Note): Observable<Note> {
+    return this.httpClient.put<Note>(this.backendUrl, note);
+  }
 }

@@ -14,12 +14,35 @@ export class NoteDisplayComponent implements OnInit {
   note: Note = {};
   content = new FormControl<string>("");
 
+  saveDisabled = true;
+
   constructor(private noteService: NoteService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.noteService.currentNoteChanged.subscribe(note => {
       this.note = note
-      this.content.setValue(note.content === undefined ? null : note.content);
+      this.content.setValue(note.content === undefined ? "" : note.content);
+    });
+
+    this.content.valueChanges.subscribe(() => this.checkIfSaveIsDisabled());
+  }
+
+  // TODO: figure out why this one won't work with the Lorem ipsum text
+  public checkIfSaveIsDisabled(): void {
+    this.saveDisabled = this.content.value === this.note.content;
+  }
+
+  public save(): void {
+    if (this.saveDisabled) return;
+
+    const noteToSave: Note = {
+      file: this.note.file,
+      content: this.content.value!
+    };
+
+    this.noteService.save(noteToSave).subscribe(newNote => {
+      this.note = newNote;
+      this.content.setValue(newNote.content!);
     });
   }
 }

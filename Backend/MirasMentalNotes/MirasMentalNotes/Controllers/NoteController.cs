@@ -11,6 +11,22 @@ namespace MirasMentalNotes.Controllers
         private string fullPath(string fileName) =>
             Path.Combine(AppSettings.FileConfig.ContentDirectory, fileName);
 
+        [HttpPut]
+        public ActionResult<Note> UpdateNote(Note note)
+        {
+            if (note.File is null || note.Content is null)
+                return BadRequest("Both the file name and content need to be defined.");
+
+            var filePath = fullPath(note.File);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound("A file with that name does not exist.");
+
+            System.IO.File.WriteAllText(filePath, note.Content);
+
+            return GetNote(note.File);
+        }
+
         [HttpDelete]
         [Route("{fileName}")]
         public ActionResult<string> DeleteNote(string fileName)
@@ -18,7 +34,7 @@ namespace MirasMentalNotes.Controllers
             var filePath = fullPath(fileName);
 
             if (!System.IO.File.Exists(filePath))
-                return BadRequest("A file with that name does not exist.");
+                return NotFound("A file with that name does not exist.");
 
             System.IO.File.Delete(filePath);
             return Ok();

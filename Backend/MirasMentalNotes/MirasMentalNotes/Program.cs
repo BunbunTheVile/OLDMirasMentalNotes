@@ -8,11 +8,12 @@ if (builder.Environment.IsDevelopment())
     builder.Services.AddCors(options =>
     {
         options.AddPolicy(
-            name: "AllowSpecificOrigins",
+            name: "AllowAllOrigins",
             policy =>
             {
-                policy.WithOrigins("http://localhost:4200");
+                policy.AllowAnyOrigin();
                 policy.AllowAnyMethod();
+                policy.AllowAnyHeader();
             });
     });
 }
@@ -22,7 +23,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseCors("AllowSpecificOrigins");
+app.UseCors("AllowAllOrigins");
 app.UseAuthorization();
 app.MapControllers();
 

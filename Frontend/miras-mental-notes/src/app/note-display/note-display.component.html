@@ -1,8 +1,9 @@
-<h2>{{ note.file ? note.file : "..." }}</h2>
+<div class="flex-container">
+    <h2>{{ note.file ? note.file : "..." }}</h2>
+    <h2 class="material-icons" [ngClass]="saveDisabled ? 'disabled' : ''" (click)="save()">
+        save
+    </h2>
+</div>
 
-<textarea 
-    id="content" 
-    type="text" 
-    [formControl]="content"
-    rows="30">
+<textarea id="content" type="text" [formControl]="content" rows="30">
 </textarea>

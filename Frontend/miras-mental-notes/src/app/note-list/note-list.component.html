@@ -1,10 +1,9 @@
 <h2>Your Notes</h2>
 
-
-    <li class="flex-container" *ngFor="let file of files">
-        <i class="delete-button material-icons" (click)="delete(file)">delete</i>
-        <span class="list-item-text" (click)="select(file)">{{ file }}</span>
-    </li>
+<li class="flex-container" *ngFor="let file of files">
+    <i class="delete-button material-icons" (click)="delete(file)">delete</i>
+    <span class="list-item-text" (click)="select(file)">{{ file }}</span>
+</li>
 
 
 <form class="flex-container">
