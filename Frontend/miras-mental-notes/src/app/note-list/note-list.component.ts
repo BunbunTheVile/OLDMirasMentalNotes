@@ -33,4 +33,12 @@ export class NoteListComponent implements OnInit {
         this.fileInput.setValue("");
     });
   }
+
+  public delete(fileName: string): void {
+    this.noteService.delete(fileName).subscribe(() => {
+      const index = this.files.indexOf(fileName);
+      if (index !== -1)
+        this.files.splice(index, 1);
+    });
+  }
 }

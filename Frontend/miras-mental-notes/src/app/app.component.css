@@ -5,6 +5,7 @@
 
 app-note-list {
     width: 20%;
+    min-width: 250px;
     margin-right: 5px;
 }
 
@@ -23,4 +24,15 @@ app-note-list, app-note-display {
 h1 {
     border-bottom: 1px solid var(--text-color);
     text-align: center;
+}
+
+@media only screen and (max-width: 550px) {
+    app-note-list {
+      width: 50%;
+      min-width: 0;
+    }
+
+    app-note-display {
+        width: 50%;
+    }
 }

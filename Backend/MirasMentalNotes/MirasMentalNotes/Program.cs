@@ -12,6 +12,7 @@ if (builder.Environment.IsDevelopment())
             policy =>
             {
                 policy.WithOrigins("http://localhost:4200");
+                policy.AllowAnyMethod();
             });
     });
 }

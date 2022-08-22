@@ -3,10 +3,6 @@ li {
     margin-left: 8px;
 }
 
-li:hover {
-    cursor: pointer;
-}
-
 h2 {
     border-bottom: 1px solid var(--text-color);
     text-align: center;
@@ -34,5 +30,22 @@ input {
 .flex-container {
     display: flex;
     flex-direction: row;
+}
+
+form {
     margin-top: 8px;
+}
+
+.list-item-text {
+    line-height: 1.4;
+    width: fit-content;
+}
+
+.list-item-text:hover, .delete-button:hover {
+    cursor: pointer;
+}
+
+.delete-button {
+    padding-right: 4px;
+    margin-left: -4px;
 }
