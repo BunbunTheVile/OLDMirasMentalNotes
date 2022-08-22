@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Note } from 'src/app/models/note.model';
 
 @Injectable({
@@ -34,5 +34,9 @@ export class NoteService {
 
   public create(fileName: string): Observable<Note> {
     return this.httpClient.post<Note>(`${this.backendUrl}/${fileName}`, null);
+  }
+
+  public delete(fileName: string): Observable<any> {
+    return this.httpClient.delete(`${this.backendUrl}/${fileName}`);
   }
 }

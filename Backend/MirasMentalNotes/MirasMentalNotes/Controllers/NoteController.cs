@@ -8,11 +8,27 @@ namespace MirasMentalNotes.Controllers
     [Route("api/note")]
     public class NoteController : ControllerBase
     {
+        private string fullPath(string fileName) =>
+            Path.Combine(AppSettings.FileConfig.ContentDirectory, fileName);
+
+        [HttpDelete]
+        [Route("{fileName}")]
+        public ActionResult<string> DeleteNote(string fileName)
+        {
+            var filePath = fullPath(fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return BadRequest("A file with that name does not exist.");
+
+            System.IO.File.Delete(filePath);
+            return Ok();
+        }
+
         [HttpPost]
         [Route("{fileName}")]
         public ActionResult<Note> CreateNote(string fileName)
         {
-            var filePath = Path.Combine(AppSettings.FileConfig.ContentDirectory, fileName);
+            var filePath = fullPath(fileName);
 
             if (System.IO.File.Exists(filePath))
                 return BadRequest("A file with that name already exists.");
