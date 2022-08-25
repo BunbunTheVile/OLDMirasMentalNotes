@@ -41,11 +41,15 @@ form {
     width: fit-content;
 }
 
-.list-item-text:hover, .delete-button:hover {
+.list-item-text:hover, .material-icons:hover {
     cursor: pointer;
 }
 
-.delete-button {
+.left-button {
     padding-right: 4px;
     margin-left: -4px;
+}
+
+.right-button {
+    padding-left: 4px;
 }

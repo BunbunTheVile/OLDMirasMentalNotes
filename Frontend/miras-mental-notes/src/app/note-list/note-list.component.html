@@ -1,8 +1,13 @@
 <h2>Your Notes</h2>
 
-<li class="flex-container" *ngFor="let file of files">
-    <i class="delete-button material-icons" (click)="delete(file)">delete</i>
-    <span class="list-item-text" (click)="select(file)">{{ file }}</span>
+<li class="flex-container" *ngFor="let item of noteListItems">
+    <i *ngIf="!item.deletionStarted" class="left-button material-icons" (click)="beginDeletion(item)" title="delete">delete</i>
+
+    <i *ngIf="item.deletionStarted" class="left-button material-icons" (click)="stopDeletion(item)" title="cancel deletion">restore</i>
+
+    <span class="list-item-text" (click)="select(item)">{{ item.file }}</span>
+
+    <i *ngIf="item.deletionStarted" class="right-button material-icons"(click)="delete(item)" title="delete forever">delete_forever</i>
 </li>
 
 

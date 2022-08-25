@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NoteListItem } from '../models/note.model';
 import { NoteService } from '../services/note.service';
 
 @Component({
@@ -9,36 +10,57 @@ import { NoteService } from '../services/note.service';
   styleUrls: ['./note-list.component.css']
 })
 export class NoteListComponent implements OnInit {
-  files: string[] = [];
+  noteListItems: NoteListItem[] = [];
   fileInput = new FormControl<string>("");
 
   constructor(private noteService: NoteService, private router: Router) { }
 
   ngOnInit(): void {
-    this.noteService.getNames().subscribe(names => this.files = names);
+    this.noteService.getNames().subscribe(names => {
+      names.forEach(name => {
+        this.noteListItems.push({
+          file: name,
+          deletionStarted: false
+        });
+      });
+    });
   }
 
-  public select(file: string): void {
-    this.noteService.select(file);
+  public select(item: NoteListItem): void {
+    this.noteService.select(item.file);
   }
 
   public create(): void {
     const fileName = this.fileInput.getRawValue();
 
-    if (!fileName) return;
+    if (!fileName || fileName === "") return;
 
     this.noteService.create(fileName).subscribe(note => {
-      if (note.file)
-        this.files.push(note.file);
-        this.fileInput.setValue("");
+      if (note.file) {
+        this.noteListItems.push({
+          file: note.file,
+          deletionStarted: false
+        });
+      }
+
+      this.fileInput.setValue("");
     });
   }
 
-  public delete(fileName: string): void {
-    this.noteService.delete(fileName).subscribe(() => {
-      const index = this.files.indexOf(fileName);
+  public delete(item: NoteListItem): void {
+    this.noteService.delete(item.file).subscribe(() => {
+      const index = this.noteListItems.indexOf(item);
+      
       if (index !== -1)
-        this.files.splice(index, 1);
+        this.noteListItems.splice(index, 1);
     });
+  }
+
+  public beginDeletion(item: NoteListItem): void {
+    item.deletionStarted = true;
+  }
+
+  public stopDeletion(item: NoteListItem): void {
+    item.deletionStarted = false;
   }
 }
