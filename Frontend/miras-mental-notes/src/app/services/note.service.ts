@@ -8,7 +8,7 @@ import { Note } from 'src/app/models/note.model';
 })
 export class NoteService {
 
-  backendUrl: string = "https://localhost:7001/api/note";
+  backendUrl: string = "https://localhost:5001/api/note";
 
   currentNote: Note = {};
 
