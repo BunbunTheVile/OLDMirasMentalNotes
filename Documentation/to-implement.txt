@@ -11,3 +11,4 @@ To Be Implemented:
 -allow saving with ctrl+S
 -show separate list of related notes (based on tags)
 -allow linking other notes to the one you edit (a simply list of note names as part of the Note object)
+-automatically select a newly created file
