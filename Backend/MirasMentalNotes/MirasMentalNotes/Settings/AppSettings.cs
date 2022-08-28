@@ -10,7 +10,11 @@
 
         public static void Initialize()
         {
-            AppSettings.FileConfig = FileConfig.LoadFromFile();
+            FileConfig = FileConfig.LoadFromFile();
+            if (!Directory.Exists(FileConfig.ContentDirectory))
+            {
+                Directory.CreateDirectory(FileConfig.ContentDirectory);
+            }
         }
     }
 }
