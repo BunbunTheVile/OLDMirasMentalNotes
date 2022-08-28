@@ -11,7 +11,7 @@
 </li>
 
 
-<form class="flex-container">
+<form class="flex-container" (keydown.enter)="$event.preventDefault()">
     <i id="add-button" class="material-icons" (click)="create()">add</i>
     <span id="input-container">
         <input (keydown.enter)="create()" id="fileToCreate" type="text" [formControl]="fileInput" autofocus>

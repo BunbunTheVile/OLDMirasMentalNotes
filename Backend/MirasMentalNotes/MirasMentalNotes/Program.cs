@@ -30,6 +30,9 @@ app.MapControllers();
 
 AppSettings.Initialize();
 
-Process.Start("cmd", "/c start http://localhost:5000");
+if (app.Environment.IsProduction())
+{
+    Process.Start("cmd", "/c start http://localhost:5000");
+}
 
 app.Run();

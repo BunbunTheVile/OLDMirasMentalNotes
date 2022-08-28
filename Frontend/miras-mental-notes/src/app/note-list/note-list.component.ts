@@ -37,10 +37,14 @@ export class NoteListComponent implements OnInit {
 
     this.noteService.create(fileName).subscribe(note => {
       if (note.file) {
-        this.noteListItems.push({
+        const listItem: NoteListItem = {
           file: note.file,
           deletionStarted: false
-        });
+        }
+
+        this.noteListItems.push(listItem);
+
+        this.select(listItem);
       }
 
       this.fileInput.setValue("");
