@@ -1,4 +1,5 @@
 using MirasMentalNotes.Settings;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -28,5 +29,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 AppSettings.Initialize();
+
+Process.Start("cmd", "/c start http://localhost:5000");
 
 app.Run();
