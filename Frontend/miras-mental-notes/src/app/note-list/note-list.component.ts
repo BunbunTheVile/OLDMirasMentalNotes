@@ -57,6 +57,9 @@ export class NoteListComponent implements OnInit {
       
       if (index !== -1)
         this.noteListItems.splice(index, 1);
+
+      if (this.noteService.currentNote.file === item.file)
+        this.noteService.select("");
     });
   }
 

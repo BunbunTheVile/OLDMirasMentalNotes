@@ -26,6 +26,11 @@ export class NoteService {
   }
 
   public select(fileName: string): void {
+    if (fileName === "") {
+      this.currentNote = {};
+      this.currentNoteChanged.emit(this.currentNote);
+    }
+    
     this.get(fileName).subscribe(note => {
       this.currentNote = note;
       this.currentNoteChanged.emit(note);
