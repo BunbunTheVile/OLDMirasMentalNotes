@@ -38,7 +38,7 @@ namespace MirasMentalNotes.Models
 
             if (text.Contains(tagsStart) && text.Contains(tagsEnd))
             {
-                var tagText = text.Split(tagsStart)[1].Split(tagsEnd)[0];
+                var tagText = text.Split(tagsStart)[1].Split(tagsEnd)[0].Trim();
                 var tags = tagText.Split(" ");
                 this.Tags = tags.ToList();
             }
@@ -54,7 +54,6 @@ namespace MirasMentalNotes.Models
                 var startIndex = text.IndexOf(tagsStart);
                 var endIndex = text.IndexOf(tagsEnd);
                 var tagText = text.Substring(startIndex, endIndex - startIndex + tagsEnd.Length);
-                Console.WriteLine(tagText);
                 text = text.Replace(tagText, "");
             }
 

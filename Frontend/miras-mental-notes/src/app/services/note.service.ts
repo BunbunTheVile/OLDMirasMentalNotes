@@ -8,7 +8,7 @@ import { Note } from 'src/app/models/note.model';
 })
 export class NoteService {
 
-  backendUrl: string = "https://localhost:5001/api/note";
+  backendUrl: string = "http://localhost:5000/api/note";
 
   currentNote: Note = {};
 
@@ -29,11 +29,9 @@ export class NoteService {
     if (noteName === "") {
       this.currentNote = {};
       this.currentNoteChanged.emit(this.currentNote);
-      console.log("service within empty note name")
     }
     
     this.get(noteName).subscribe(note => {
-      console.log("service select get: " + note.name)
       this.currentNote = note;
       this.currentNoteChanged.emit(note);
     });

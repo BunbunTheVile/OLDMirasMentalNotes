@@ -2,12 +2,19 @@ textarea {
     width: 100%;
     box-sizing: border-box;
     font-size: 110%;
+    margin-top: 8px;
 }
 
 h2 {
     padding-left: 8px;
     margin-block-start: 8px;
     margin-block-end: 8px;
+}
+
+h4 {
+    padding-right: 4px;
+    margin-block-start: 2px;
+    margin-block-end: 2px;
 }
 
 .flex-container {
@@ -25,4 +32,13 @@ h2 {
 .disabled {
     color: var(--text-color-disabled);
     cursor: default;
+}
+
+.tag-container {
+    display: flex;
+    flex-direction: row;
+}
+
+input {
+    width: 100%;
 }

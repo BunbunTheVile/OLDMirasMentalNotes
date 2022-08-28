@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MirasMentalNotes.Helpers;
 using MirasMentalNotes.Models;
 using MirasMentalNotes.Settings;
 
@@ -8,21 +9,15 @@ namespace MirasMentalNotes.Controllers
     [Route("api/note")]
     public class NoteController : ControllerBase
     {
-        private string fullPath(string noteName) =>
-            Path.Combine(AppSettings.FileConfig.ContentDirectory, noteName) + ".note";
-
         [HttpPut]
         public ActionResult<Note> UpdateNote(Note note)
         {
             if (note.Name is null || note.Content is null)
                 return BadRequest("Both the file name and content need to be defined.");
 
-            var filePath = fullPath(note.Name);
+            var result = NoteHelper.WriteNoteToFile(note);
 
-            if (!System.IO.File.Exists(filePath))
-                return NotFound("A file with that name does not exist.");
-
-            System.IO.File.WriteAllText(filePath, note.Content);
+            if (!result) return NotFound("A file with that name does not exist.");
 
             return GetNote(note.Name);
         }
@@ -31,7 +26,7 @@ namespace MirasMentalNotes.Controllers
         [Route("{noteName}")]
         public ActionResult<string> DeleteNote(string noteName)
         {
-            var filePath = fullPath(noteName);
+            var filePath = NoteHelper.fullPath(noteName);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound("A file with that name does not exist.");
@@ -44,7 +39,7 @@ namespace MirasMentalNotes.Controllers
         [Route("{noteName}")]
         public ActionResult<Note> CreateNote(string noteName)
         {
-            var filePath = fullPath(noteName);
+            var filePath = NoteHelper.fullPath(noteName);
 
             if (System.IO.File.Exists(filePath))
                 return BadRequest("A file with that name already exists.");

@@ -1,7 +1,5 @@
 To Be Implemented:
 ===================
--add tags to files (first without functionality)
--allow viewing and editing tags
 -save files with DM tag to separate directory, automatically add the tag when reading the file
 -allow filtering for tags (first search bar implementation)
 -allow changing file name
@@ -11,3 +9,4 @@ To Be Implemented:
 -show separate list of related notes (based on tags)
 -allow linking other notes to the one you edit (a simply list of note names as part of the Note object)
 -add support for images
+-think about not making frontend note interface properties nullable
