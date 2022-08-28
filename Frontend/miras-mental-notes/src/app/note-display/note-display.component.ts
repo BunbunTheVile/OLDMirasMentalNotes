@@ -29,6 +29,10 @@ export class NoteDisplayComponent implements OnInit {
 
   // TODO: figure out why this one won't work with the Lorem ipsum text
   public checkIfSaveIsDisabled(): void {
+    if (!this.note.file) {
+      this.saveDisabled = true;
+      return;
+    }
     this.saveDisabled = this.content.value === this.note.content;
   }
 
