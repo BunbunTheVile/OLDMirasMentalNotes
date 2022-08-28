@@ -1,9 +1,9 @@
 export interface Note {
-    file?: string;
+    name?: string;
     content?: string;
 }
 
 export interface NoteListItem {
-    file: string;
+    name: string;
     deletionStarted: boolean;
 }

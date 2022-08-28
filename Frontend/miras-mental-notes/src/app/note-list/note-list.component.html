@@ -5,7 +5,7 @@
 
     <i *ngIf="item.deletionStarted" class="left-button material-icons" (click)="stopDeletion(item)" title="cancel deletion">restore</i>
 
-    <span class="list-item-text" (click)="select(item)">{{ item.file }}</span>
+    <span class="list-item-text" (click)="select(item)">{{ item.name }}</span>
 
     <i *ngIf="item.deletionStarted" class="right-button material-icons"(click)="delete(item)" title="delete forever">delete_forever</i>
 </li>

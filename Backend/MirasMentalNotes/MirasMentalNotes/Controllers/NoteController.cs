@@ -8,30 +8,30 @@ namespace MirasMentalNotes.Controllers
     [Route("api/note")]
     public class NoteController : ControllerBase
     {
-        private string fullPath(string fileName) =>
-            Path.Combine(AppSettings.FileConfig.ContentDirectory, fileName);
+        private string fullPath(string noteName) =>
+            Path.Combine(AppSettings.FileConfig.ContentDirectory, noteName) + ".note";
 
         [HttpPut]
         public ActionResult<Note> UpdateNote(Note note)
         {
-            if (note.File is null || note.Content is null)
+            if (note.Name is null || note.Content is null)
                 return BadRequest("Both the file name and content need to be defined.");
 
-            var filePath = fullPath(note.File);
+            var filePath = fullPath(note.Name);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound("A file with that name does not exist.");
 
             System.IO.File.WriteAllText(filePath, note.Content);
 
-            return GetNote(note.File);
+            return GetNote(note.Name);
         }
 
         [HttpDelete]
-        [Route("{fileName}")]
-        public ActionResult<string> DeleteNote(string fileName)
+        [Route("{noteName}")]
+        public ActionResult<string> DeleteNote(string noteName)
         {
-            var filePath = fullPath(fileName);
+            var filePath = fullPath(noteName);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound("A file with that name does not exist.");
@@ -41,23 +41,23 @@ namespace MirasMentalNotes.Controllers
         }
 
         [HttpPost]
-        [Route("{fileName}")]
-        public ActionResult<Note> CreateNote(string fileName)
+        [Route("{noteName}")]
+        public ActionResult<Note> CreateNote(string noteName)
         {
-            var filePath = fullPath(fileName);
+            var filePath = fullPath(noteName);
 
             if (System.IO.File.Exists(filePath))
                 return BadRequest("A file with that name already exists.");
 
             System.IO.File.WriteAllText(filePath, "");
-            return CreatedAtAction(nameof(GetNote), new { fileName }, new Note { File = fileName });
+            return CreatedAtAction(nameof(GetNote), new { noteName }, new Note { Name = noteName });
         }
 
         [HttpGet]
-        [Route("{fileName}")]
-        public ActionResult<Note> GetNote(string fileName)
+        [Route("{noteName}")]
+        public ActionResult<Note> GetNote(string noteName)
         {
-            var note = Note.FromFileName(fileName);
+            var note = Note.FromNoteName(noteName);
 
             return note is not null
                 ? note
@@ -68,14 +68,17 @@ namespace MirasMentalNotes.Controllers
         public ActionResult<List<string>> GetAllNoteNames()
         {
             var fileNames = Directory.GetFiles(AppSettings.FileConfig.ContentDirectory!).ToList();
-            return GetNamesTrimmedToRelativePaths(fileNames);
+            var noteFiles = fileNames.Where(x => x.EndsWith(".note")).ToList();
+            return GetTrimmedNoteNames(noteFiles);
         }
 
-        private List<string> GetNamesTrimmedToRelativePaths(List<string> fileNames)
+        private List<string> GetTrimmedNoteNames(List<string> fileNames)
         {
             var contentDir = AppSettings.FileConfig.ContentDirectory!;
 
-            return fileNames.Select(fileName => Path.GetRelativePath(contentDir, fileName)).ToList();
+            var relativePaths = fileNames.Select(fileName => Path.GetRelativePath(contentDir, fileName));
+
+            return relativePaths.Select(x => x.Replace(".note", "")).ToList();
         }
     }
 }

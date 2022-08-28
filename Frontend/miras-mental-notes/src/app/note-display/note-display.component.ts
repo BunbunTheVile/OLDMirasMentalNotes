@@ -29,7 +29,7 @@ export class NoteDisplayComponent implements OnInit {
 
   // TODO: figure out why this one won't work with the Lorem ipsum text
   public checkIfSaveIsDisabled(): void {
-    if (!this.note.file) {
+    if (!this.note.name) {
       this.saveDisabled = true;
       return;
     }
@@ -40,7 +40,7 @@ export class NoteDisplayComponent implements OnInit {
     if (this.saveDisabled) return;
 
     const noteToSave: Note = {
-      file: this.note.file,
+      name: this.note.name,
       content: this.content.value!
     };
 
