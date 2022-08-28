@@ -19,7 +19,7 @@ export class NoteListComponent implements OnInit {
     this.noteService.getNames().subscribe(names => {
       names.forEach(name => {
         this.noteListItems.push({
-          file: name,
+          name: name,
           deletionStarted: false
         });
       });
@@ -27,7 +27,7 @@ export class NoteListComponent implements OnInit {
   }
 
   public select(item: NoteListItem): void {
-    this.noteService.select(item.file);
+    this.noteService.select(item.name);
   }
 
   public create(): void {
@@ -36,9 +36,9 @@ export class NoteListComponent implements OnInit {
     if (!fileName || fileName === "") return;
 
     this.noteService.create(fileName).subscribe(note => {
-      if (note.file) {
+      if (note.name) {
         const listItem: NoteListItem = {
-          file: note.file,
+          name: note.name,
           deletionStarted: false
         }
 
@@ -52,13 +52,13 @@ export class NoteListComponent implements OnInit {
   }
 
   public delete(item: NoteListItem): void {
-    this.noteService.delete(item.file).subscribe(() => {
+    this.noteService.delete(item.name).subscribe(() => {
       const index = this.noteListItems.indexOf(item);
       
       if (index !== -1)
         this.noteListItems.splice(index, 1);
 
-      if (this.noteService.currentNote.file === item.file)
+      if (this.noteService.currentNote.name === item.name)
         this.noteService.select("");
     });
   }

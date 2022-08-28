@@ -21,17 +21,19 @@ export class NoteService {
     return this.httpClient.get<string[]>(this.backendUrl);
   }
 
-  public get(fileName: string): Observable<Note> {
-    return this.httpClient.get<Note>(`${this.backendUrl}/${fileName}`)
+  public get(noteName: string): Observable<Note> {
+    return this.httpClient.get<Note>(`${this.backendUrl}/${noteName}`)
   }
 
-  public select(fileName: string): void {
-    if (fileName === "") {
+  public select(noteName: string): void {
+    if (noteName === "") {
       this.currentNote = {};
       this.currentNoteChanged.emit(this.currentNote);
+      console.log("service within empty note name")
     }
     
-    this.get(fileName).subscribe(note => {
+    this.get(noteName).subscribe(note => {
+      console.log("service select get: " + note.name)
       this.currentNote = note;
       this.currentNoteChanged.emit(note);
     });

@@ -1,5 +1,5 @@
 <div class="flex-container">
-    <h2>{{ note.file ? note.file : "..." }}</h2>
+    <h2>{{ note.name ? note.name : "..." }}</h2>
     <h2 class="material-icons" [ngClass]="saveDisabled ? 'disabled' : ''" (click)="save()">
         save
     </h2>

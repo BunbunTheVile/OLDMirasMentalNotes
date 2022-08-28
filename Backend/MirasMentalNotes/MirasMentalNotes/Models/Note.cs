@@ -4,19 +4,19 @@ namespace MirasMentalNotes.Models
 {
     public record Note
     {
-        public string? File { get; set; }
+        public string? Name { get; set; }
         public string? Content { get; set; }
     
-        public static Note? FromFileName(string fileName)
+        public static Note? FromNoteName(string noteName)
         {
             var contentDir = AppSettings.FileConfig.ContentDirectory;
-            var filePath = Path.Combine(contentDir, fileName);
+            var filePath = Path.Combine(contentDir, noteName) + ".note";
 
-            if (!System.IO.File.Exists(filePath)) return null;
+            if (!File.Exists(filePath)) return null;
 
             var contentFile = new Note();
-            contentFile.File = fileName;
-            contentFile.Content = System.IO.File.ReadAllText(filePath);
+            contentFile.Name = noteName;
+            contentFile.Content = File.ReadAllText(filePath);
 
             return contentFile;
         }
