@@ -21,11 +21,9 @@ if (builder.Environment.IsDevelopment())
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseCors("AllowAllOrigins");
-app.UseAuthorization();
 app.MapControllers();
 
 AppSettings.Initialize();

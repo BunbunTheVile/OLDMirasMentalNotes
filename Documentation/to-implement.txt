@@ -1,6 +1,5 @@
 To Be Implemented:
 ===================
--only use .note files and hide file endings on display
 -add tags to files (first without functionality)
 -allow viewing and editing tags
 -save files with DM tag to separate directory, automatically add the tag when reading the file
