@@ -1,5 +1,5 @@
-To Be Implemented:
-===================
+Ideas To Be Implemented:
+========================
 -save files with DM tag to separate directory, automatically add the tag when reading the file
 -allow filtering for tags (first search bar implementation)
 -allow changing file name
@@ -10,3 +10,11 @@ To Be Implemented:
 -allow linking other notes to the one you edit (a simply list of note names as part of the Note object)
 -add support for images
 -think about not making frontend note interface properties nullable
+
+-authentication with dm and player mode
+-players can suggest notes, have to be approved
+-save notes in database once on a server
+	-important: add an export feature to save all notes as readable files; .odt maybe?
+
+-add a youtube video player to share a played video with everyone
+-allow saving playlists of youtube videos for music
