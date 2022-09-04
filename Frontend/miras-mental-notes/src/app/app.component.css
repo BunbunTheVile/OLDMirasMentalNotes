@@ -14,7 +14,7 @@ app-note-display {
 }
 
 app-note-list, app-note-display {
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--text-color-highlight);
     border-radius: 5px;
     padding-left: 8px;
     padding-right: 8px;
@@ -22,7 +22,7 @@ app-note-list, app-note-display {
 }
 
 h1 {
-    border-bottom: 1px solid var(--text-color);
+    border-bottom: 1px solid;
     text-align: center;
 }
 
